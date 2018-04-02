@@ -6,7 +6,6 @@ import thunk from 'redux-thunk';
 import { createLogger } from 'redux-logger';
 import App from '../App/container';
 import reducer from '../../redux/reducers';
-import store from '../../redux/store';
 import routes from '../../router/routes';
 
 import '../../../scss/app.scss';
@@ -18,8 +17,12 @@ const logger = createLogger({
   timestamp: false,
 });
 
+
+// eslint-disable-next-line no-underscore-dangle
+const store = createStore(reducer, window.__PRELOADED_STATE__, applyMiddleware(thunk, logger));
+
 export default (
-  <Provider store={createStore(reducer, store, applyMiddleware(thunk, logger))}>
+  <Provider store={store}>
     <RouterProvider router={createRouter(routes)}>
       <App />
     </RouterProvider>

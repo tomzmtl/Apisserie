@@ -24,7 +24,14 @@ app.get('/favicon.ico', (req, res) => {
 });
 
 app.get('*', (req, res) => {
-  res.render('index');
+  res.render('index', {
+    state: JSON.stringify({
+      items: [
+        { name: 'Petates' },
+        { name: 'Tomates' },
+      ],
+    }),
+  });
 });
 
 app.listen(PORT, () => {

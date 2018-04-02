@@ -1,8 +1,8 @@
 import { reducer as routerReducer } from 'fans-router';
-import counter from './counter';
+import items from './items';
 
 
 export default (state, action) => ({
-  counter: counter(state.counter, action, state),
+  items: items(state.items, action),
   router: routerReducer(state.router, action, state),
 });
