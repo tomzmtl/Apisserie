@@ -24,8 +24,6 @@ const airbrake = new AirbrakeClient({
   projectKey: 'f01b239f5a097fcea29bd2fa5404a8aa',
 });
 
-app.use(makeErrorHandler(airbrake));
-
 
 app.use('/public', express.static(path.join(__dirname, '../../dist')));
 
@@ -45,6 +43,8 @@ app.get('/favicon.ico', (req, res) =>
 app.get('*', (req, res) => {
   res.render('index');
 });
+
+app.use(makeErrorHandler(airbrake));
 
 app.listen(PORT, () => {
   // eslint-disable-next-line no-console
