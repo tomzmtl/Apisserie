@@ -41,6 +41,7 @@ app.get('/favicon.ico', (req, res) =>
   res.status(200).set({ 'Content-Type': 'image/x-icon' }).send());
 
 app.get('*', (req, res) => {
+  throw new Error('hello from Express');
   res.render('index');
 });
 
