@@ -16,6 +16,17 @@ app.engine('handlebars', handlebars.engine);
 app.set('view engine', 'handlebars');
 app.set('views', path.join(__dirname, 'views'));
 
+const AirbrakeClient = require('airbrake-js');
+const makeErrorHandler = require('airbrake-js/dist/instrumentation/express');
+
+const airbrake = new AirbrakeClient({
+  projectId: 178622,
+  projectKey: 'f01b239f5a097fcea29bd2fa5404a8aa',
+});
+
+app.use(makeErrorHandler(airbrake));
+
+
 app.use('/public', express.static(path.join(__dirname, '../../dist')));
 
 app.use(bodyParser.json());
