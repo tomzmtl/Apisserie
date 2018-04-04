@@ -4,7 +4,7 @@ import React from 'react';
 import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
-import ItemList from '../ItemList/container';
+import ProductList from '../ProductList/container';
 
 import './styles.scss';
 
@@ -18,10 +18,8 @@ const App = () => (
         </Typography>
       </Toolbar>
     </AppBar>
-    <ItemList />
+    <ProductList />
   </div>
 );
-
-App.propTypes = {};
 
 export default App;

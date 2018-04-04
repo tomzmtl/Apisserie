@@ -1,40 +1,41 @@
 const express = require('express');
+const path = require('path');
+const bodyParser = require('body-parser');
+const expressHandlebars = require('express-handlebars');
+const db = require('./api/db');
+const productApi = require('./api/endpoints/products');
+const userApi = require('./api/endpoints/user');
+
 
 const app = express();
-const path = require('path');
-
+const handlebars = expressHandlebars.create();
 
 const PORT = process.env.PORT || 3000;
 
-const expressHandlebars = require('express-handlebars');
-// const hbsHelpers = require('./helpers/handlebars');
-const hbs = expressHandlebars.create({
-  extname: '.hbs',
-  // helpers: hbsHelpers,
-});
-
-app.engine('.hbs', hbs.engine);
-app.set('view engine', '.hbs');
-app.set('views', path.join(__dirname, './views'));
+app.engine('handlebars', handlebars.engine);
+app.set('view engine', 'handlebars');
+app.set('views', path.join(__dirname, 'views'));
 
 app.use('/public', express.static(path.join(__dirname, '../../dist')));
 
-app.get('/favicon.ico', (req, res) => {
-  res.status(200).set({ 'Content-Type': 'image/x-icon' }).send();
-});
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+  extended: true,
+}));
+
+db();
+
+app.get('/api/v1/products', productApi.get);
+app.patch('/api/v1/user/:id', userApi.patch);
+
+app.get('/favicon.ico', (req, res) =>
+  res.status(200).set({ 'Content-Type': 'image/x-icon' }).send());
 
 app.get('*', (req, res) => {
-  res.render('index', {
-    state: JSON.stringify({
-      items: [
-        { name: 'Petates' },
-        { name: 'Tomates' },
-      ],
-    }),
-  });
+  res.render('index');
 });
 
 app.listen(PORT, () => {
   // eslint-disable-next-line no-console
-  console.log('Spark listening on port 3000!');
+  console.log('App listening on port 3000!');
 });

@@ -4,12 +4,11 @@ import List, {
   ListItem,
   ListItemSecondaryAction,
   ListItemText,
-  ListSubheader,
 } from 'material-ui/List';
 import Switch from 'material-ui/Switch';
 
 
-const renderItems = items => items.map((item, i) => (
+const renderItems = products => products.map((item, i) => (
   <ListItem key={i.toString()}>
     <ListItemText primary={item.name} />
     <ListItemSecondaryAction>
@@ -21,14 +20,14 @@ const renderItems = items => items.map((item, i) => (
   </ListItem>
 ));
 
-const ItemList = ({ items }) => (
-  <List subheader={<ListSubheader>Settings</ListSubheader>}>
-    {renderItems(items)}
+const ProductList = ({ products }) => (
+  <List>
+    {renderItems(products)}
   </List>
 );
 
-ItemList.propTypes = {
-  items: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+ProductList.propTypes = {
+  products: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
 };
 
-export default ItemList;
+export default ProductList;

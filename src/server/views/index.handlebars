@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>List & Go</title>
+    <link rel="stylesheet" href="public/css/styles.css">
+  </head>
+  <body>
+    <div id="app"></div>
+
+    {{#if view}}
+      <script>
+        window.__PRELOADED_STATE__ = '{{{ view }}}';
+      </script>
+    {{/if}}
+
+    <script src="public/js/bundle.js"></script>
+  </body>
+</html>

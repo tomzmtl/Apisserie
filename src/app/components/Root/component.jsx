@@ -10,6 +10,8 @@ import deepOrange from 'material-ui/colors/deepOrange';
 import App from '../App/container';
 import reducer from '../../redux/reducers';
 import routes from '../../router/routes';
+import { initializeApp } from '../../redux/actions/app';
+import initialState from '../../redux/initialState';
 
 import '../../../scss/app.scss';
 
@@ -29,7 +31,9 @@ const logger = createLogger({
 
 
 // eslint-disable-next-line no-underscore-dangle
-const store = createStore(reducer, window.__PRELOADED_STATE__, applyMiddleware(thunk, logger));
+const store = createStore(reducer, initialState, applyMiddleware(thunk, logger));
+
+store.dispatch(initializeApp());
 
 export default (
   <Provider store={store}>

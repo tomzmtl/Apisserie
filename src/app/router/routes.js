@@ -4,8 +4,12 @@ export default [
     path: '/',
     routes: [
       {
-        name: 'about',
-        path: '/about',
+        name: 'login',
+        path: 'login',
+      },
+      {
+        name: 'products',
+        path: 'products',
       },
     ],
   },
