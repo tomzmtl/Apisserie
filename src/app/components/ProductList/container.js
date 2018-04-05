@@ -5,6 +5,7 @@ import { addToList, removeFromList } from '../../redux/actions/user';
 
 const mapState = state => ({
   products: state.products,
+  translations: state.translations,
   userProducts: state.user.list.map(item => item._id),
 });
 

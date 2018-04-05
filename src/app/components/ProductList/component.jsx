@@ -8,13 +8,15 @@ import List, {
 import Switch from 'material-ui/Switch';
 
 
-const renderItems = (products, onRemove, onAdd, userProducts) =>
+const capitalize = string => `${string[0].toUpperCase().concat(string.slice(1))}`;
+
+const renderItems = (products, onRemove, onAdd, translations, userProducts) =>
   products.map((item, i) => {
     const selected = userProducts.includes(item._id);
     const cb = selected ? onRemove : onAdd;
     return (
       <ListItem key={i.toString()}>
-        <ListItemText primary={item.name} />
+        <ListItemText primary={capitalize(translations[item.name])} />
         <ListItemSecondaryAction>
           <Switch
             onChange={() => { cb(item._id); }}
@@ -26,10 +28,10 @@ const renderItems = (products, onRemove, onAdd, userProducts) =>
   });
 
 const ProductList = ({
-  products, onRemove, onAdd, userProducts,
+  products, onRemove, onAdd, translations, userProducts,
 }) => (
   <List className="ProductList">
-    {renderItems(products, onRemove, onAdd, userProducts)}
+    {renderItems(products, onRemove, onAdd, translations, userProducts)}
   </List>
 );
 
@@ -37,6 +39,7 @@ ProductList.propTypes = {
   onAdd: PropTypes.func.isRequired,
   onRemove: PropTypes.func.isRequired,
   products: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  translations: PropTypes.objectOf(PropTypes.string).isRequired,
   userProducts: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 

@@ -3,6 +3,7 @@ import App from './component';
 
 
 const mapState = state => ({
+  loading: state.ui.init,
   working: state.ui.working,
 });
 
