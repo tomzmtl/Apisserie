@@ -5,7 +5,7 @@ import List, {
   ListItemSecondaryAction,
   ListItemText,
 } from 'material-ui/List';
-import Switch from 'material-ui/Switch';
+import { Switch } from 'material-ui';
 
 
 const capitalize = string => `${string[0].toUpperCase().concat(string.slice(1))}`;
@@ -15,7 +15,7 @@ const renderItems = (products, onRemove, onAdd, translations, userProducts) =>
     const selected = userProducts.includes(item._id);
     const cb = selected ? onRemove : onAdd;
     return (
-      <ListItem key={i.toString()}>
+      <ListItem onClick={() => { cb(item._id); }} className="ProductList__item" key={i.toString()}>
         <ListItemText primary={capitalize(translations[item.name])} />
         <ListItemSecondaryAction>
           <Switch
