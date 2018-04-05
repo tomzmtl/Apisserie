@@ -35,13 +35,13 @@ app.use(bodyParser.urlencoded({
 db();
 
 app.get('/api/v1/products', productApi.get);
-app.patch('/api/v1/user/:id', userApi.patch);
+app.get('/api/v1/user/:userId', userApi.patch);
+app.patch('/api/v1/user/:userId', userApi.patch);
 
 app.get('/favicon.ico', (req, res) =>
   res.status(200).set({ 'Content-Type': 'image/x-icon' }).send());
 
 app.get('*', (req, res) => {
-  throw new Error('hello from Express');
   res.render('index');
 });
 

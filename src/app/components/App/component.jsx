@@ -1,25 +1,47 @@
 import React from 'react';
-// import classnames from 'classnames';
-// import PropTypes from 'prop-types';
-import AppBar from 'material-ui/AppBar';
-import Toolbar from 'material-ui/Toolbar';
-import Typography from 'material-ui/Typography';
+import PropTypes from 'prop-types';
+import classnames from 'classnames';
+import { AppBar, Toolbar, Typography, IconButton } from 'material-ui';
+import { withStyles } from 'material-ui/styles';
+import Add from 'material-ui-icons/Add';
 import ProductList from '../ProductList/container';
 
 import './styles.scss';
 
 
-const App = () => (
-  <div className="App">
-    <AppBar>
-      <Toolbar>
-        <Typography variant="title" color="inherit">
-          Apisserie
-        </Typography>
-      </Toolbar>
-    </AppBar>
-    <ProductList />
-  </div>
-);
+const styles = {
+  toolbar: {
+    display: 'flex',
+    justifyContent: 'space-between',
+  },
+};
 
-export default App;
+const App = ({ classes, working }) => {
+  const cls = classnames({
+    App: true,
+    'App--working': working,
+  });
+
+  return (
+    <div className={cls}>
+      <AppBar>
+        <Toolbar className={classes.toolbar}>
+          <Typography variant="title" color="inherit">
+            Apisserie
+          </Typography>
+          <IconButton>
+            <Add nativeColor="#FFFFFF" />
+          </IconButton>
+        </Toolbar>
+      </AppBar>
+      <ProductList />
+    </div>
+  );
+};
+
+App.propTypes = {
+  classes: PropTypes.objectOf(PropTypes.string).isRequired,
+  working: PropTypes.bool.isRequired,
+};
+
+export default withStyles(styles)(App);

@@ -1,13 +1,19 @@
 const initialState = {
-  list: [],
+  working: false,
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case 'UPDATE_USER_LIST':
+    case 'APP_START_WORKING':
       return {
         ...state,
-        list: action.list,
+        working: true,
+      };
+
+    case 'APP_STOP_WORKING':
+      return {
+        ...state,
+        working: false,
       };
 
     default:

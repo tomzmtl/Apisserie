@@ -2,4 +2,10 @@
 
 .App {
   padding-top: 80px;
+
+  &--working {
+    .ProductList {
+      opacity: 0.5;
+    }
+  }
 }

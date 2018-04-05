@@ -1,8 +1,14 @@
 const User = require('../models/User');
 
 
+const get = (req, res) => {
+  User.findById(req.params.userId).then((user) => {
+    res.status(200).send(user);
+  });
+};
+
 const patch = (req, res) => {
-  User.findById(req.params.id).then((user) => {
+  User.findById(req.params.userId).then((user) => {
     switch (req.body.action) {
       case 'list.remove':
         user.list.pull({ _id: req.body.id });
@@ -20,5 +26,6 @@ const patch = (req, res) => {
 };
 
 module.exports = {
+  get,
   patch,
 };
