@@ -3,11 +3,20 @@ import ProductList from './component';
 import { addToList, removeFromList } from '../../redux/actions/user';
 
 
-const mapState = state => ({
-  products: state.products,
-  translations: state.translations,
-  userProducts: state.user.list.map(item => item._id),
-});
+const capitalize = string => `${string[0].toUpperCase().concat(string.slice(1))}`;
+
+const mapState = (state) => {
+  const { translations } = state;
+  const products = state.products.map(p => ({
+    ...p,
+    name: capitalize(translations[p.name]),
+  }));
+
+  return {
+    products,
+    userProducts: state.user.list.map(item => item._id),
+  };
+};
 
 const mapDispatch = dispatch => ({
   onAdd: productId => dispatch(addToList(productId)),
