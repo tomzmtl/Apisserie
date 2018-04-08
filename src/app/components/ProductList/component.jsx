@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import classnames from 'classnames';
 import List, {
   ListItem,
   ListItemSecondaryAction,
@@ -8,21 +9,38 @@ import List, {
 import { InputAdornment } from 'material-ui/Input';
 import { Switch, TextField } from 'material-ui';
 import { Search } from 'material-ui-icons';
+import { withStyles } from 'material-ui/styles';
 
+import './styles.scss';
+
+
+const styles = {
+  filter: {
+    width: '100%',
+  },
+};
+
+const handleClick = (cb, id) => () => cb(id);
 
 const renderItems = (products, onRemove, onAdd, userProducts) =>
-  products.map((item, i) => {
+  products.map((item) => {
     const selected = userProducts.includes(item._id);
     const cb = selected ? onRemove : onAdd;
+    const cls = classnames({
+      ProductList__item: true,
+      'ProductList__item--selected': selected,
+    });
     return (
-      <ListItem onClick={() => { cb(item._id); }} className="ProductList__item" key={i.toString()}>
-        <ListItemText primary={item.name} />
-        <ListItemSecondaryAction>
-          <Switch
-            onChange={() => { cb(item._id); }}
-            checked={selected}
-          />
-        </ListItemSecondaryAction>
+      <ListItem onClick={handleClick(cb, item._id)} className={cls} key={item._id}>
+        <React.Fragment>
+          <ListItemText primary={item.name} />
+          <ListItemSecondaryAction>
+            <Switch
+              onChange={() => { cb(item._id); }}
+              checked={selected}
+            />
+          </ListItemSecondaryAction>
+        </React.Fragment>
       </ListItem>
     );
   });
@@ -52,20 +70,20 @@ class ProductList extends React.Component {
 
   render() {
     const {
+      classes,
       products,
       onRemove,
       onAdd,
       userProducts,
     } = this.props;
 
-    console.log(222, products);
-
     const filteredProducts = products.filter(filterCb(this.state.filter));
 
     return (
       <List className="ProductList">
-        <ListItem>
+        <ListItem className="ProductList__filter">
           <TextField
+            className={classes.filter}
             InputProps={{ endAdornment: inputDecoration }}
             onChange={this.handleChange}
           />
@@ -77,10 +95,11 @@ class ProductList extends React.Component {
 }
 
 ProductList.propTypes = {
+  classes: PropTypes.objectOf(PropTypes.string).isRequired,
   onAdd: PropTypes.func.isRequired,
   onRemove: PropTypes.func.isRequired,
   products: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   userProducts: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
-export default ProductList;
+export default withStyles(styles)(ProductList);
