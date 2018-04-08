@@ -7,7 +7,7 @@ import List, {
   ListItemText,
 } from 'material-ui/List';
 import { InputAdornment } from 'material-ui/Input';
-import { Switch, TextField } from 'material-ui';
+import { Checkbox, TextField } from 'material-ui';
 import { Search } from 'material-ui-icons';
 import { withStyles } from 'material-ui/styles';
 
@@ -22,23 +22,23 @@ const styles = {
 
 const handleClick = (cb, id) => () => cb(id);
 
-const renderItems = (products, onRemove, onAdd, userProducts) =>
+const renderItems = (products, onRemove, onAdd, userProducts, workingItem) =>
   products.map((item) => {
     const selected = userProducts.includes(item._id);
     const cb = selected ? onRemove : onAdd;
     const cls = classnames({
       ProductList__item: true,
       'ProductList__item--selected': selected,
+      'ProductList__item--working': workingItem === item._id,
     });
+
+
     return (
       <ListItem onClick={handleClick(cb, item._id)} className={cls} key={item._id}>
         <React.Fragment>
           <ListItemText primary={item.name} />
-          <ListItemSecondaryAction>
-            <Switch
-              onChange={() => { cb(item._id); }}
-              checked={selected}
-            />
+          <ListItemSecondaryAction className="ProductList__checkbox">
+            <Checkbox onChange={() => { cb(item._id); }} checked={selected} />
           </ListItemSecondaryAction>
         </React.Fragment>
       </ListItem>
@@ -75,6 +75,7 @@ class ProductList extends React.Component {
       onRemove,
       onAdd,
       userProducts,
+      workingItem,
     } = this.props;
 
     const filteredProducts = products.filter(filterCb(this.state.filter));
@@ -88,7 +89,7 @@ class ProductList extends React.Component {
             onChange={this.handleChange}
           />
         </ListItem>
-        {renderItems(filteredProducts, onRemove, onAdd, userProducts)}
+        {renderItems(filteredProducts, onRemove, onAdd, userProducts, workingItem)}
       </List>
     );
   }
@@ -100,6 +101,11 @@ ProductList.propTypes = {
   onRemove: PropTypes.func.isRequired,
   products: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   userProducts: PropTypes.arrayOf(PropTypes.string).isRequired,
+  workingItem: PropTypes.string,
+};
+
+ProductList.defaultProps = {
+  workingItem: null,
 };
 
 export default withStyles(styles)(ProductList);

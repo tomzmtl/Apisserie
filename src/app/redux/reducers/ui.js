@@ -15,12 +15,14 @@ export default (state = initialState, action) => {
       return {
         ...state,
         working: true,
+        workingItem: action.workingItem || null,
       };
 
     case 'APP_STOP_WORKING':
       return {
         ...state,
         working: false,
+        workingItem: null,
       };
 
     default:

@@ -10,18 +10,18 @@ export const updateList = list => ({
 
 export const removeFromList = productId => (dispatch) => {
   // const { user } = getState();
-  dispatch({ type: 'APP_START_WORKING' });
+  dispatch({ type: 'APP_START_WORKING', workingItem: productId });
   remove(productId, USER_ID).then(({ list }) => {
     dispatch(updateList(list));
-    dispatch({ type: 'APP_STOP_WORKING' });
+    dispatch({ type: 'APP_STOP_WORKING', workingItem: productId });
   });
 };
 
 export const addToList = productId => (dispatch) => {
   // const { user } = getState();
-  dispatch({ type: 'APP_START_WORKING' });
+  dispatch({ type: 'APP_START_WORKING', workingItem: productId });
   add(productId, USER_ID).then(({ list }) => {
     dispatch(updateList(list));
-    dispatch({ type: 'APP_STOP_WORKING' });
+    dispatch({ type: 'APP_STOP_WORKING', workingItem: productId });
   });
 };

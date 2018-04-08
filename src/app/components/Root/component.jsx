@@ -5,8 +5,7 @@ import { applyMiddleware, createStore } from 'redux';
 import thunk from 'redux-thunk';
 import { createLogger } from 'redux-logger';
 import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
-import deepPurple from 'material-ui/colors/deepPurple';
-import deepOrange from 'material-ui/colors/deepOrange';
+import { deepOrange, teal } from 'material-ui/colors';
 import App from '../App/container';
 import reducer from '../../redux/reducers';
 import routes from '../../router/routes';
@@ -18,8 +17,8 @@ import '../../../scss/app.scss';
 
 const theme = createMuiTheme({
   palette: {
-    primary: deepOrange,
-    secondary: deepPurple,
+    primary: teal,
+    secondary: deepOrange,
   },
 });
 

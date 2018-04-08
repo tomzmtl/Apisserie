@@ -23,5 +23,15 @@
     &--selected {
       font-weight: bold;
     }
+
+    &--working {
+      .ProductList__checkbox {
+        opacity: 0.5;
+      }
+    }
+  }
+
+  &__checkbox {
+    transition: 300ms;
   }
 }
