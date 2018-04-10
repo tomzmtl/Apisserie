@@ -5,7 +5,9 @@ const product = mongoose.Schema({
   selected: Boolean,
 });
 
-module.exports = mongoose.Schema({
-  name: String,
-  products: [product],
-});
+module.exports = {
+  Recipes: mongoose.Schema({
+    name: String,
+    products: [product],
+  }),
+};

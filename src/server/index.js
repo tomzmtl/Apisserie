@@ -3,8 +3,8 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const expressHandlebars = require('express-handlebars');
 const db = require('./api/db');
-const productApi = require('./api/endpoints/products');
-const userApi = require('./api/endpoints/user');
+const productApi = require('./api/products/endpoints');
+const userApi = require('./api/user/endpoints');
 
 
 const app = express();

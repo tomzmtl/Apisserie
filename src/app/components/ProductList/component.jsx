@@ -24,21 +24,21 @@ const handleClick = (cb, id) => () => cb(id);
 
 const renderItems = (products, onRemove, onAdd, userProducts, workingItem) =>
   products.map((item) => {
-    const selected = userProducts.includes(item._id);
+    const selected = userProducts.includes(item.id);
     const cb = selected ? onRemove : onAdd;
     const cls = classnames({
       ProductList__item: true,
       'ProductList__item--selected': selected,
-      'ProductList__item--working': workingItem === item._id,
+      'ProductList__item--working': workingItem === item.id,
     });
 
 
     return (
-      <ListItem onClick={handleClick(cb, item._id)} className={cls} key={item._id}>
+      <ListItem onClick={handleClick(cb, item.id)} className={cls} key={item.id}>
         <React.Fragment>
           <ListItemText primary={item.name} />
           <ListItemSecondaryAction className="ProductList__checkbox">
-            <Checkbox onChange={() => { cb(item._id); }} checked={selected} />
+            <Checkbox onChange={() => { cb(item.id); }} checked={selected} />
           </ListItemSecondaryAction>
         </React.Fragment>
       </ListItem>

@@ -1,9 +1,10 @@
-const User = require('../models/User');
+const { User } = require('./models');
+const { mapUser } = require('./mappers');
 
 
 const get = (req, res) => {
   User.findById(req.params.userId).then((user) => {
-    res.status(200).send(user);
+    res.status(200).send(mapUser(user));
   });
 };
 
@@ -19,8 +20,8 @@ const patch = (req, res) => {
       default: break;
     }
 
-    user.save().then((u) => {
-      res.send(u);
+    user.save().then((update) => {
+      res.send(mapUser(update));
     });
   });
 };
