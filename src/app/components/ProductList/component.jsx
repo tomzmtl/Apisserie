@@ -22,8 +22,9 @@ const styles = {
 
 const handleClick = (cb, id) => () => cb(id);
 
-const renderItems = (products, onRemove, onAdd, userProducts, workingItem) =>
-  products.map((item) => {
+const renderItems = (products, onRemove, onAdd, userProducts, workingItem) => {
+  products.sort((a, b) => (a.name > b.name ? 1 : -1));
+  return products.map((item) => {
     const selected = userProducts.includes(item.id);
     const cb = selected ? onRemove : onAdd;
     const cls = classnames({
@@ -31,7 +32,6 @@ const renderItems = (products, onRemove, onAdd, userProducts, workingItem) =>
       'ProductList__item--selected': selected,
       'ProductList__item--working': workingItem === item.id,
     });
-
 
     return (
       <ListItem onClick={handleClick(cb, item.id)} className={cls} key={item.id}>
@@ -44,6 +44,7 @@ const renderItems = (products, onRemove, onAdd, userProducts, workingItem) =>
       </ListItem>
     );
   });
+};
 
 const inputDecoration = (
   <InputAdornment position="end">

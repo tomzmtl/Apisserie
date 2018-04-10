@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { AppBar, CircularProgress, IconButton, Toolbar, Typography } from 'material-ui';
 import { withStyles } from 'material-ui/styles';
-import Add from 'material-ui-icons/Add';
+import Shop from 'material-ui-icons/Shop';
 import ProductList from '../ProductList/container';
 
 import './styles.scss';
@@ -32,7 +32,7 @@ const App = ({ classes, loading, working }) => {
         <Toolbar className={classes.toolbar}>
           <Typography variant="title" color="inherit">Apisserie</Typography>
           <IconButton>
-            <Add nativeColor="#FFFFFF" />
+            <Shop nativeColor="#FFFFFF" />
           </IconButton>
         </Toolbar>
       </AppBar>

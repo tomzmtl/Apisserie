@@ -14,7 +14,7 @@ const mapState = (state) => {
 
   return {
     products,
-    userProducts: state.user.list.map(item => item.id),
+    userProducts: state.user.list.items.map(item => item.id),
     workingItem: state.ui.workingItem,
   };
 };

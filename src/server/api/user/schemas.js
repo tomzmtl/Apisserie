@@ -9,6 +9,9 @@ module.exports = {
   User: mongoose.Schema({
     gid: String,
     name: String,
-    list: [listItem],
+    list: {
+      started: Boolean,
+      items: [listItem],
+    },
   }),
 };
