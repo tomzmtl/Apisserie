@@ -9,7 +9,7 @@ const mapState = (state) => {
   const { translations } = state;
   const products = state.products.map(p => ({
     ...p,
-    name: capitalize(translations[p.name]),
+    name: translations[p.name] ? capitalize(translations[p.name]) : p.name,
   }));
 
   return {
