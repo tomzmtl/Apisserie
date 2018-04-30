@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
-import { AppBar, CircularProgress, IconButton, Toolbar, Typography } from 'material-ui';
+import { CircularProgress } from 'material-ui';
 import { withStyles } from 'material-ui/styles';
-import Shop from 'material-ui-icons/Shop';
 import ProductList from '../ProductList/container';
+import Header from '../Header/container';
 
 import './styles.scss';
 
@@ -20,7 +20,22 @@ const styles = {
   },
 };
 
-const App = ({ classes, loading, working }) => {
+const renderApp = (initialized, classes) => {
+  if (!initialized) {
+    return <CircularProgress className={classes.spinner} size={50} />;
+  }
+
+  return (
+    <React.Fragment>
+      <Header />
+      <ProductList />
+    </React.Fragment>
+  );
+};
+
+const App = ({
+  classes, initialized, working,
+}) => {
   const cls = classnames({
     App: true,
     'App--working': working,
@@ -28,23 +43,14 @@ const App = ({ classes, loading, working }) => {
 
   return (
     <div className={cls}>
-      <AppBar>
-        <Toolbar className={classes.toolbar}>
-          <Typography variant="title" color="inherit">Apisserie</Typography>
-          <IconButton>
-            <Shop nativeColor="#FFFFFF" />
-          </IconButton>
-        </Toolbar>
-      </AppBar>
-      {loading ? <CircularProgress className={classes.spinner} size={50} /> : null}
-      {loading ? null : <ProductList />}
+      {renderApp(initialized, classes)}
     </div>
   );
 };
 
 App.propTypes = {
   classes: PropTypes.objectOf(PropTypes.string).isRequired,
-  loading: PropTypes.bool.isRequired,
+  initialized: PropTypes.bool.isRequired,
   working: PropTypes.bool.isRequired,
 };
 

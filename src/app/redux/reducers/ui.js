@@ -1,14 +1,14 @@
 const initialState = {
-  init: true,
+  initialized: false,
   working: false,
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case 'APP_INIT_STOP':
+    case 'APP_INITIALIZED':
       return {
         ...state,
-        init: false,
+        initialized: true,
       };
 
     case 'APP_START_WORKING':

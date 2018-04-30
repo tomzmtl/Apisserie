@@ -8,13 +8,19 @@ import List, {
 } from 'material-ui/List';
 import { InputAdornment } from 'material-ui/Input';
 import { Checkbox, TextField } from 'material-ui';
-import { Search } from 'material-ui-icons';
+import { CheckCircle, Search } from 'material-ui-icons';
 import { withStyles } from 'material-ui/styles';
 
 import './styles.scss';
 
 
 const styles = {
+  check: {
+    display: 'block',
+    height: '120px',
+    margin: 'auto',
+    width: '120px',
+  },
   filter: {
     width: '100%',
   },
@@ -69,8 +75,25 @@ class ProductList extends React.Component {
     this.setState({ filter: e.target.value });
   }
 
+  renderFilter() {
+    if (this.props.active) {
+      return null;
+    }
+
+    return (
+      <ListItem className="ProductList__filter">
+        <TextField
+          className={this.props.classes.filter}
+          InputProps={{ endAdornment: inputDecoration }}
+          onChange={this.handleChange}
+        />
+      </ListItem>
+    );
+  }
+
   render() {
     const {
+      active,
       classes,
       products,
       onRemove,
@@ -83,20 +106,16 @@ class ProductList extends React.Component {
 
     return (
       <List className="ProductList">
-        <ListItem className="ProductList__filter">
-          <TextField
-            className={classes.filter}
-            InputProps={{ endAdornment: inputDecoration }}
-            onChange={this.handleChange}
-          />
-        </ListItem>
+        {this.renderFilter()}
         {renderItems(filteredProducts, onRemove, onAdd, userProducts, workingItem)}
+        {active && !products.length ? <CheckCircle className={classes.check} nativeColor="#EEEEEE" /> : null}
       </List>
     );
   }
 }
 
 ProductList.propTypes = {
+  active: PropTypes.bool.isRequired,
   classes: PropTypes.objectOf(PropTypes.string).isRequired,
   onAdd: PropTypes.func.isRequired,
   onRemove: PropTypes.func.isRequired,

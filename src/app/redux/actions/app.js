@@ -4,6 +4,7 @@ import { USER_ID, updateList } from './user';
 
 const rest = create();
 
+
 export default null;
 
 export const initializeApp = () => (dispatch) => {
@@ -13,6 +14,6 @@ export const initializeApp = () => (dispatch) => {
   ]).then(([products, user]) => {
     dispatch({ type: 'UPDATE_PRODUCTS', products });
     dispatch(updateList(user.list));
-    dispatch({ type: 'APP_INIT_STOP' });
+    dispatch({ type: 'APP_INITIALIZED' });
   });
 };

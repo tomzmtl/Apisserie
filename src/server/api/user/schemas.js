@@ -10,7 +10,7 @@ module.exports = {
     gid: String,
     name: String,
     list: {
-      started: Boolean,
+      active: Boolean,
       items: [listItem],
     },
   }),

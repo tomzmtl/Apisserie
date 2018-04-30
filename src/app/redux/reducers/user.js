@@ -1,5 +1,8 @@
 const initialState = {
-  list: [],
+  list: {
+    active: false,
+    items: [],
+  },
 };
 
 export default (state = initialState, action) => {
@@ -7,7 +10,19 @@ export default (state = initialState, action) => {
     case 'UPDATE_USER_LIST':
       return {
         ...state,
-        list: action.list,
+        list: {
+          ...state.list,
+          ...action.list,
+        },
+      };
+
+    case 'TOGGLE_ACTIVE':
+      return {
+        ...state,
+        list: {
+          ...state.list,
+          active: !state.list.active,
+        },
       };
 
     default:
