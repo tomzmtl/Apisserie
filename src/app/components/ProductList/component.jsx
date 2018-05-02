@@ -20,9 +20,20 @@ const styles = {
     height: '120px',
     margin: 'auto',
     width: '120px',
+    marginTop: '100px',
   },
   filter: {
     width: '100%',
+  },
+  list: {
+    paddingTop: 0,
+  },
+  search: {
+    marginBottom: '10px',
+    position: 'sticky',
+    top: '56px',
+    background: '#EEE',
+    zIndex: 200,
   },
 };
 
@@ -81,7 +92,7 @@ class ProductList extends React.Component {
     }
 
     return (
-      <ListItem className="ProductList__filter">
+      <ListItem className={this.props.classes.search}>
         <TextField
           className={this.props.classes.filter}
           InputProps={{ endAdornment: inputDecoration }}
@@ -105,7 +116,7 @@ class ProductList extends React.Component {
     const filteredProducts = products.filter(filterCb(this.state.filter));
 
     return (
-      <List className="ProductList">
+      <List className={classes.list}>
         {this.renderFilter()}
         {renderItems(filteredProducts, onRemove, onAdd, userProducts, workingItem)}
         {active && !products.length ? <CheckCircle className={classes.check} nativeColor="#EEEEEE" /> : null}

@@ -1,7 +1,7 @@
-import en from '../../../translations/en';
+import fr from '../../../translations/fr';
 
 
-const initialState = en;
+const initialState = fr;
 
 export default (state = initialState, action) => {
   switch (action.type) {

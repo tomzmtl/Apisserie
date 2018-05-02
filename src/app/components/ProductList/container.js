@@ -3,13 +3,11 @@ import ProductList from './component';
 import { addToList, removeFromList } from '../../redux/actions/user';
 
 
-const capitalize = string => `${string[0].toUpperCase().concat(string.slice(1))}`;
-
 const mapState = (state) => {
   const { translations } = state;
   let products = state.products.map(p => ({
     ...p,
-    name: translations[p.name] ? capitalize(translations[p.name]) : p.name,
+    name: translations[p.name] ? translations[p.name] : p.name,
   }));
 
   const { active } = state.user.list;
