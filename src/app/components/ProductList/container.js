@@ -4,10 +4,9 @@ import { addToList, removeFromList } from '../../redux/actions/user';
 
 
 const mapState = (state) => {
-  const { translations } = state;
   let products = state.products.map(p => ({
     ...p,
-    name: translations[p.name] ? translations[p.name] : p.name,
+    name: p.name.fr,
   }));
 
   const { active } = state.user.list;
