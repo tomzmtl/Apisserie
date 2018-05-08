@@ -19,6 +19,7 @@ const mapState = (state) => {
   return {
     active,
     products,
+    searching: state.ui.searching,
     userProducts: state.user.list.items.map(item => item.id),
     workingItem: state.ui.workingItem,
   };

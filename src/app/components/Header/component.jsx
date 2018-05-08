@@ -1,31 +1,52 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { AppBar, IconButton, Toolbar, Typography } from 'material-ui';
-import { PauseCircleFilled, PlayCircleFilled } from 'material-ui-icons';
+import { PauseCircleFilled, PlayCircleFilled, Search } from 'material-ui-icons';
 import { withStyles } from 'material-ui/styles';
 
 
 const styles = {
+  search: {
+    marginLeft: 'auto',
+  },
   toolbar: {
     display: 'flex',
     justifyContent: 'space-between',
   },
 };
 
-const renderButton = (active, toggleActive) => {
+const renderSearchButton = (active, classes, toggleSearch) => {
   if (active) {
-    return <PauseCircleFilled nativeColor="#FFFFFF" onClick={() => toggleActive()} />;
+    return null;
   }
 
-  return <PlayCircleFilled nativeColor="#FFFFFF" onClick={() => toggleActive()} />;
+  return (
+    <IconButton className={classes.search} onClick={toggleSearch}>
+      <Search nativeColor="#FFFFFF" />
+    </IconButton>
+  );
 };
 
-const Header = ({ active, classes, toggleActive }) => (
+const renderShopButton = (active, toggleActive) => {
+  if (active) {
+    return <PauseCircleFilled nativeColor="#FFFFFF" onClick={toggleActive} />;
+  }
+
+  return <PlayCircleFilled nativeColor="#FFFFFF" onClick={toggleActive} />;
+};
+
+const Header = ({
+  active,
+  classes,
+  toggleActive,
+  toggleSearch,
+}) => (
   <AppBar>
     <Toolbar className={classes.toolbar}>
       <Typography variant="title" color="inherit">Apisserie</Typography>
+      {renderSearchButton(active, classes, toggleSearch)}
       <IconButton>
-        {renderButton(active, toggleActive)}
+        {renderShopButton(active, toggleActive)}
       </IconButton>
     </Toolbar>
   </AppBar>
@@ -35,6 +56,7 @@ Header.propTypes = {
   active: PropTypes.bool.isRequired,
   classes: PropTypes.objectOf(PropTypes.string).isRequired,
   toggleActive: PropTypes.func.isRequired,
+  toggleSearch: PropTypes.func.isRequired,
 };
 
 export default withStyles(styles)(Header);

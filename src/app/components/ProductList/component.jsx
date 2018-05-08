@@ -87,7 +87,7 @@ class ProductList extends React.Component {
   }
 
   renderFilter() {
-    if (this.props.active) {
+    if (this.props.active || !this.props.searching) {
       return null;
     }
 
@@ -109,6 +109,7 @@ class ProductList extends React.Component {
       products,
       onRemove,
       onAdd,
+      searching,
       userProducts,
       workingItem,
     } = this.props;
@@ -117,7 +118,7 @@ class ProductList extends React.Component {
 
     return (
       <List className={classes.list}>
-        {this.renderFilter()}
+        {this.renderFilter(searching)}
         {renderItems(filteredProducts, onRemove, onAdd, userProducts, workingItem)}
         {active && !products.length ? <CheckCircle className={classes.check} nativeColor="#EEEEEE" /> : null}
       </List>
@@ -131,6 +132,7 @@ ProductList.propTypes = {
   onAdd: PropTypes.func.isRequired,
   onRemove: PropTypes.func.isRequired,
   products: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  searching: PropTypes.bool.isRequired,
   userProducts: PropTypes.arrayOf(PropTypes.string).isRequired,
   workingItem: PropTypes.string,
 };

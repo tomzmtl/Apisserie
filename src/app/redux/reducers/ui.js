@@ -1,5 +1,6 @@
 const initialState = {
   initialized: false,
+  searching: false,
   working: false,
 };
 
@@ -23,6 +24,12 @@ export default (state = initialState, action) => {
         ...state,
         working: false,
         workingItem: null,
+      };
+
+    case 'TOGGLE_SEARCH':
+      return {
+        ...state,
+        searching: !state.searching,
       };
 
     default:
