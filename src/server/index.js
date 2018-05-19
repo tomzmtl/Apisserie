@@ -26,6 +26,7 @@ const airbrake = new AirbrakeClient({
 
 
 app.use('/public', express.static(path.join(__dirname, '../../dist')));
+app.use('/wakemydyno.txt', express.static(path.join(__dirname, '../../dist/static/wakemydyno.txt')));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
