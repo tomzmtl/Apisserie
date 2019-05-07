@@ -8,7 +8,6 @@
     "build": "webpack",
     "dev": "webpack --watch & nodemon src/server",
     "lint": "eslint src/app/**/*.js",
-    "postinstall": "npm run build",
     "start": "node src/server",
     "test": "mocha --opts mocha.opts --harmony || true",
     "test:ci": "mocha --opts mocha.travis.opts --harmony"
