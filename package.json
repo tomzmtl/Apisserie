@@ -12,6 +12,9 @@
     "test": "mocha --opts mocha.opts --harmony || true",
     "test:ci": "mocha --opts mocha.travis.opts --harmony"
   },
+  "engines": {
+    "node": "12.x.x"
+  },
   "author": "Thomas Andreo",
   "license": "MIT",
   "devDependencies": {
