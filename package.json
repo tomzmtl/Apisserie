@@ -13,7 +13,7 @@
     "test:ci": "mocha --opts mocha.travis.opts --harmony"
   },
   "engines": {
-    "node": "12.x.x"
+    "node": "12.x"
   },
   "author": "Thomas Andreo",
   "license": "MIT",
